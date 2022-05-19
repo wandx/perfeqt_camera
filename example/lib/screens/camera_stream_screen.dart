@@ -75,18 +75,18 @@ class _CameraStreamScreenState extends State<CameraStreamScreen> {
       setState(() => _processing = false);
     });
 
-    // await ImageStreamConverter.convertImageToPng(availableImage)
-    //     .then((path) async {
-    //   await PerfeqtCamera.detectEdges(path!).then((result) {
-    //     setState(() => _edgeDetectionResult = result);
-    //   }).whenComplete(() async {
-    //     await deleteImage(path);
-    //   });
-    // }).whenComplete(() {
-    //   Future.delayed(const Duration(milliseconds: 200)).then((value) {
-    //     setState(() => _processing = false);
-    //   });
-    // });
+    await ImageStreamConverter.convertImageToPng(availableImage)
+        .then((path) async {
+      await PerfeqtCamera.detectEdges(path!).then((result) {
+        setState(() => _edgeDetectionResult = result);
+      }).whenComplete(() async {
+        await deleteImage(path);
+      });
+    }).whenComplete(() {
+      Future.delayed(const Duration(milliseconds: 200)).then((value) {
+        setState(() => _processing = false);
+      });
+    });
   }
 
   // delete image
